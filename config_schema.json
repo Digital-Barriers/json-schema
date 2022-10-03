@@ -1,0 +1,1021 @@
+{
+  "definitions": {
+    "guid": {
+      "$id": "#guid",
+      "title": "A guid",
+      "description": "A guid",
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+    },
+    "stringParam": {
+      "$id": "#stringParam",
+      "title": "Parameter of type string",
+      "description": "Parameter of type string",
+      "type": "object",
+      "required": [
+        "type",
+        "name",
+        "internalId",
+        "description",
+        "value",
+        "required",
+        "external"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PParameterString",
+            "PParameterModelPath"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "internalId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "external": {
+          "type": "boolean"
+        }
+
+      }
+    },
+      "boolParam": {
+        "$id": "#boolParam",
+        "title": "Parameter of type boolean",
+        "description": "Parameter of type boolean",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterBool"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "numericParam": {
+        "$id": "#numericParam",
+        "title": "Parameter of type int or float",
+        "description": "Parameter of type int or float",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterInt",
+              "PParameterFloat"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "integer",
+              "number"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "rangeParam": {
+        "$id": "#rangeParam",
+        "title": "Parameter of type range",
+        "description": "Parameter of type integer or float with range (minimum and maximum)",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "minValue",
+          "maxValue",
+          "stepValue",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterRangeInt",
+              "PParameterRangeFloat"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "integer",
+              "number"
+            ]
+          },
+          "minValue": {
+            "type": [
+              "integer",
+              "number"
+            ]
+          },
+          "maxValue": {
+            "type": [
+              "integer",
+              "number"
+            ]
+          },
+          "stepValue": {
+            "type": [
+              "integer",
+              "number"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "stringlistParam": {
+        "$id": "#stringlistParam",
+        "title": "Parameter of type stringlist",
+        "description": "Parameter of type stringlist",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterStringList"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "enumParam": {
+        "$id": "#enumParam",
+        "title": "Parameter of type enum",
+        "description": "Parameter of type enum",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "possibleValues",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterEnum"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "possibleValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "value": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "rectangle": {
+        "$id": "#rectangle",
+        "title": "Parameter of type rectangle",
+        "description": "Parameter of type rectangle",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "x",
+          "y",
+          "w",
+          "h",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterRectangle"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "x": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "w": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "h": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "enumListParam": {
+        "$id": "#enumListParam",
+        "title": "Parameter of type enum",
+        "description": "Parameter of type enum",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "possibleValues",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterEnumList"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "possibleValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "choice": {
+        "$id": "#choice",
+        "title": "Parameter of type choice ",
+        "description": "Allows you to make a choice",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "possibleValues",
+          "value",
+          "required",
+          "external"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterChoiceInt",
+              "PParameterChoiceFloat"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "possibleValues": {
+            "type": "object",
+            "additionalProperties": {"type": ["number", "integer"]}
+          },
+          "value": {
+            "type": ["integer", "number"]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "img2dPoint": {
+        "$id": "#img2dPoint",
+        "title": "Image 2D point",
+        "description": "A 2D point in an image, coordinate-independent (float from 0 to 1)",
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "line": {
+        "$id": "#line",
+        "title": "Line schema",
+        "description": "A line is an array of 2 2D points",
+        "type": "object",
+        "required": [
+          "type",
+          "pts"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "line"
+            ]
+          },
+          "pts": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/definitions/img2dPoint"
+            }
+          }
+        }
+      },
+      "polyline": {
+        "$id": "#polyline",
+        "title": "Polyline schema",
+        "description": "A polyline is an array of connected 2D points. The last one is not connected to the first one",
+        "type": "object",
+        "required": [
+          "type",
+          "pts"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "polyline"
+            ]
+          },
+          "pts": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "$ref": "#/definitions/img2dPoint"
+            }
+          }
+        }
+      },
+      "polygon": {
+        "$id": "#polygon",
+        "title": "Polygon schema",
+        "description": "A polygon is an array of min 3 2D points. The last one is connected to the first one",
+        "type": "object",
+        "required": [
+          "type",
+          "pts"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "polygon"
+            ]
+          },
+          "pts": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "$ref": "#/definitions/img2dPoint"
+            }
+          }
+        }
+      },
+      "imgrec": {
+        "$id": "#imgrec",
+        "title": "Rectangle in an image",
+        "description": "A rectangle in an image, coordinate-independent (float from 0 to 1)",
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "w": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "h": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "grid": {
+        "$id": "#grid",
+        "title": "Grid schema",
+        "description": "A grid is an array of min rectangles.",
+        "type": "object",
+        "required": [
+          "type",
+          "rectangles"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "grid"
+            ]
+          },
+          "rectangles": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/imgrec"
+            }
+          }
+        }
+      },
+      "fixedGrid": {
+        "$id": "#fixedGrid",
+        "title": "Fixed Grid schema",
+        "description": "A fixed grid is an array of retangles of fixed size",
+        "type": "object",
+        "required": [
+          "type",
+          "boxWidth",
+          "boxHeight",
+          "pts"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixedGrid"
+            ]
+          },
+          "boxWidth": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1.0
+          },
+          "boxHeight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1.0
+          },
+          "pts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/definitions/img2dPoint"
+            }
+          }
+        }
+      },
+      "zone": {
+        "$id": "#zone",
+        "title": "Zone schema",
+        "description": "A zone is a polygon or rectangle and some semantic info",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "required",
+          "external",
+          "imageWidth",
+          "imageHeight",
+          "contour"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PZonePolygon",
+              "PZoneGrid",
+              "PZoneFixedGrid"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "contour": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/polygon"
+              },
+              {
+                "$ref": "#/definitions/grid"
+              },
+              {
+                "$ref": "#/definitions/fixedGrid"
+              }
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "image_width": {
+            "type": "integer"
+          },
+          "image_height": {
+            "type": "integer"
+          }
+        }
+      },
+      "crossLine": {
+        "$id": "#crossLine",
+        "title": "A line with a crossing direction",
+        "description": "A line with a crossing direction",
+        "type": "object",
+        "required": [
+          "name",
+          "internalId",
+          "description",
+          "required",
+          "external",
+          "line"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "line": {
+            "$ref": "#/definitions/line"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          }
+        }
+      },
+      "zones": {
+        "$id": "#zones",
+        "title": "A list of zones",
+        "description": "A list of zones",
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "$ref": "#/definitions/zone"
+        }
+      },
+      "gpsLocation": {
+        "$id": "#gpsLocation",
+        "title": "GPS location",
+        "description": "A GPS location with a friendly name",
+        "type": "object",
+        "required": [
+          "name",
+          "internalId",
+          "description",
+          "required",
+          "external",
+          "gpsPosition"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "gpsPosition": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              }
+            ],
+            "additionalItems": false
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "DD"
+            ],
+            "default": "DD"
+          }
+        }
+      },
+      "scenario": {
+        "$id": "#scenario",
+        "title": "A scenario",
+        "description": "A scenario",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "enabled",
+          "required",
+          "external",
+          "parameters"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PScenarioIntrusion",
+              "PScenarioZoneCrossing"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "parameters": {
+              "$ref": "#/definitions/parameters"
+          }
+        }
+      },
+      "scenarios": {
+        "$id": "#scenarios",
+        "title": "The list of scenarios",
+        "description": "A list of scenarios",
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/scenario"
+            }
+          ]
+        }
+      },
+      "parameters": {
+        "$id": "#parameters",
+        "title": "The list of parameters",
+        "description": "A list of parameters",
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/stringParam"
+            },
+            {
+              "$ref": "#/definitions/boolParam"
+            },
+            {
+              "$ref": "#/definitions/numericParam"
+            },
+            {
+              "$ref": "#/definitions/rangeParam"
+            },
+            {
+              "$ref": "#/definitions/stringlistParam"
+            },
+            {
+              "$ref": "#/definitions/enumParam"
+            },
+            {
+              "$ref": "#/definitions/enumListParam"
+            },
+            {
+              "$ref": "#/definitions/rectangle"
+            },
+            {
+              "$ref": "#/definitions/choice"
+            },
+            {
+              "$ref": "#/definitions/zone"
+            },
+            {
+              "$ref": "#/definitions/gpsLocation"
+            }
+          ]
+        }
+      },
+      "crossLines": {
+        "$id": "#crossLines",
+        "title": "Crossing lines",
+        "description": "A list of crossing-lines",
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "$ref": "#/definitions/crossLine"
+        }
+      },
+      "configData": {
+        "$id": "#configData",
+        "title": "The configuration part",
+        "description": "Contains the video analytics configuration",
+        "type": "object",
+        "required": [
+          "parameters"
+        ],
+        "properties": {
+          "zones": {
+            "$ref": "#/definitions/zones"
+          },
+          "parameters": {
+            "$ref": "#/definitions/parameters"
+          },
+          "crossLines": {
+            "$ref": "#/definitions/crossLines"
+          }
+        }
+      },
+      "logLevel": {
+        "$id": "#logLevel",
+        "title": "The log level",
+        "description": "The log level among one of the predefined values",
+        "type": "string",
+        "enum": [
+          "debug",
+          "info",
+          "warning",
+          "error",
+          "critical"
+        ],
+        "default": "info"
+      },
+    "config": {
+        "$id": "#config",
+        "title": "Analytics Configuration",
+        "description": "The analytics configuration",
+        "type": "object",
+        "required": [
+          "name",
+          "analytic",
+          "version",
+          "logLevel",
+          "id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "analytic": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "logLevel": {
+            "$ref": "#/definitions/logLevel"
+          },
+          "display": {
+            "type": "boolean",
+            "description": "If true, the VA displays graphical windows"
+          },
+          "id": {
+            "$ref": "#/definitions/guid"
+          }
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "#root",
+    "title": "Root document",
+    "type": "object",
+    "required": [
+      "schemaVersion",
+      "config"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "config": {
+        "$ref": "#/definitions/config"
+      },
+      "parameters": {
+        "$ref": "#/definitions/parameters"
+      },
+      "scenarios": {
+        "$ref": "#/definitions/scenarios"
+      }
+    }
+  }
