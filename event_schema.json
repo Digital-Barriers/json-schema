@@ -1,0 +1,393 @@
+{
+  "definitions": {
+
+    "guid": {
+      "$id": "#guid",
+      "title": "A guid",
+      "description": "A guid",
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+      "examples": [
+        "0aff0ddf-bc80-4e2e-a863-cd55726d640a",
+        "33405bf4-440d-46e6-8458-38a7469f1365"
+      ]
+    },
+
+    "timestamp": {
+      "$id": "#timestamp",
+      "title": "A timestamp",
+      "description": "A timestamp with time zone and precision up to ms",
+      "type": "string",
+      "format": "date-time",
+      "examples": [
+        "2018-11-13T20:20:39.100+00:00",
+        "2018-11-13T20:20:39.765+00:00"
+        ]
+    },
+
+    "papillonParam": {
+      "$id": "#papillonParam",
+      "title": "A Papillon param",
+      "description": "A Papillon param of well-known type",
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^papillon::.*$"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "examples": [
+        {
+          "type": "papillon::PImage",
+          "value": "xxxx-base64-encoded-xxxx"
+        },
+        {
+          "type": "papillon::PDescription",
+          "value": "xxxx-base64-encoded-xxxx"
+        }
+      ]
+    },
+
+    "frameStart" : {
+      "$id": "#frameStart",
+      "title": "Payload for a frame-start event.",
+      "description": "Payload for a frame-start event.",
+      "type": "object",
+      "required": [
+        "frameNumber"
+      ],
+      "properties": {
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frameNumber"
+        }
+      }
+    },
+
+    "frameSkipped" : {
+      "$id": "#frameSkipped",
+      "title": "Payload for a skipped frame event.",
+      "description": "Payload for a skipped frame event.",
+      "type": "object",
+      "required": [
+        "frameNumber"
+      ],
+      "properties": {
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frameNumber"
+        }
+      }
+    },
+
+    "frameEnd" : {
+      "$id": "#frameEnd",
+      "title": "Payload for a end frame event.",
+      "description": "Payload for a end frame event.",
+      "type": "object",
+      "required": [
+        "frameNumber"
+      ],
+      "properties": {
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frameNumber"
+        }
+      }
+    },
+
+    "tpo" : {
+      "$id": "#tpo",
+      "title": "Payload for a tracked physical object event",
+      "description": "Payload for a tracked physical object event",
+      "type": "object",
+      "required": [
+        "objectType",
+        "objectConfidence",
+        "bbox",
+        "frameNumber",
+        "sightingId",
+        "length"
+      ],
+      "properties": {
+          "objectType": {
+            "type": "string",
+            "description": "The type of tracked object, e.g. car, vehicle ..."
+          },
+        "objectConfidence": {
+          "type": "number",
+          "description": "The confidence of the detected object"
+        },
+        "bbox": {
+          "description": "The bounding box of the object detected in the image",
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "w": {
+            "type": "number"
+          },
+          "h": {
+            "type": "number"
+          }
+        },
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frame-number"
+        },
+        "sightingId": {
+          "$ref": "#/definitions/guid"
+        },
+        "length": {
+          "type": "integer",
+          "description": "The number of tpos in this track so far"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "A crop of the detected object"
+        },
+        "subjectId": {
+          "$ref": "#/definitions/guid"
+        },
+        "subjectConfidence": {
+          "type": "number"
+        },
+        "subjectDescription": {
+          "$ref": "#/definitions/papillonParam"
+        }
+      }
+    },
+
+    "sighting" : {
+      "$id": "#sighting",
+      "title": "Payload for a sighting event.",
+      "description": "A sighting which is a summary of a tracked tpo.",
+      "type": "object",
+      "required": [
+        "objectType",
+        "objectConfidence",
+        "startFrame",
+        "endFrame",
+        "sightingId",
+        "length"
+      ],
+      "properties": {
+        "sightingId": {
+          "$ref": "#/definitions/guid"
+        },
+        "objectType": {
+          "type": "string",
+          "description": "The type of tracked object, e.g. car, vehicle ..."
+        },
+        "objectConfidence": {
+          "type": "number",
+          "description": "The confidence of the detected object"
+        },
+        "startFrame": {
+          "type": "integer",
+          "description": "The start-frame"
+        },
+        "endFrame": {
+          "type": "integer",
+          "description": "The end-frame"
+        },
+        "length": {
+          "type": "integer",
+          "description": "The number of tpos in this sighting.  Note, not the same as number of frames."
+        },
+        "stationary": {
+          "type": "boolean",
+          "description": "Was the TPO moving"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "A representative thumbnail of the object.  Stored as base64 encoded JPEG."
+        },
+        "subjectId": {
+          "$ref": "#/definitions/guid"
+        },
+        "subjectConfidence": {
+          "type": "number"
+        },
+        "subjectDescription": {
+          "$ref": "#/definitions/papillonParam"
+        }
+      }
+    },
+
+    "peopleCounter" : {
+      "$id": "#peopleCounter",
+      "title": "Payload for a People Counter event.",
+      "description": "Payload for a People Counter event.",
+      "type": "object",
+      "required": [
+        "direction",
+        "number"
+      ],
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": [
+            "in",
+            "out"
+          ],
+          "description": "Direction of line-crossing"
+        },
+        "number": {
+          "type": "integer",
+          "description": "The number of people crossing in the given direction"
+        }
+      }
+    },
+
+
+    "eventHeader": {
+      "$id": "#eventHeader",
+      "title": "Event header",
+      "description": "The header for events",
+      "type": "object",
+      "required": [
+        "type",
+        "sourceId",
+        "id",
+        "occurrenceTime"
+      ],
+      "properties": {
+        "type": {
+          "description": "Type of event, which defines the payload",
+          "type": "string",
+          "enum":[
+            "frameStart",
+            "frameSkipped",
+            "frameEnd",
+            "tpo",
+            "sighting",
+            "peopleCounter"
+          ]
+        },
+        "annotation": {
+          "type": "string"
+        },
+        "certainty": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "sourceId": {
+          "$ref": "#/definitions/guid"
+        },
+        "sourceName": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/definitions/guid"
+        },
+        "occurrenceTime": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "detectionTime": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "ancestors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/guid"
+          }
+        }
+      },
+      "examples": [{
+        "type": "A string",
+        "annotation": "A description of the event",
+        "certainty": 0.5,
+        "sourceId": "0aff0ddf-bc80-4e2e-a863-cd55726d640a",
+        "id": "33405bf4-440d-46e6-8458-38a7469f1365",
+        "occurrenceTime": "2018-11-13T20:20:39.765+00:00"
+      }]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "#root",
+  "title": "Event document",
+  "description": "This is an event",
+  "type": "object",
+  "required": [
+    "eventVersion",
+    "type",
+    "sourceId",
+    "id",
+    "occurrenceTime",
+    "eventPayload"
+  ],
+  "properties": {
+    "eventVersion": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "type": {
+      "type": "string"
+    },
+    "annotation": {
+      "type": "string"
+    },
+    "certainty": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "sourceId": {
+      "$ref": "#/definitions/guid"
+    },
+    "sourceName": {
+      "type": "string"
+    },
+    "id": {
+      "$ref": "#/definitions/guid"
+    },
+    "occurrenceTime": {
+      "$ref": "#/definitions/timestamp"
+    },
+    "detectionTime": {
+      "$ref": "#/definitions/timestamp"
+    },
+    "ancestors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/guid"
+      }
+    },
+    "eventPayload": {
+      "$id": "#eventPayload",
+      "title": "Event payload",
+      "description": "This is the payload of the event, changes depending on the event type",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/frameStart"
+        },
+        {
+          "$ref": "#/definitions/frameSkipped"
+        },
+        {
+          "$ref": "#/definitions/frameEnd"
+        },
+        {
+          "$ref": "#/definitions/tpo"
+        },
+        {
+          "$ref": "#/definitions/sighting"
+        },
+        {
+          "$ref": "#/definitions/peopleCounter"
+        }
+      ]
+    }
+  }
+}
