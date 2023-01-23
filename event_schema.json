@@ -368,7 +368,7 @@
       "$id": "#eventPayload",
       "title": "Event payload",
       "description": "This is the payload of the event, changes depending on the event type",
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/frameStart"
         },
