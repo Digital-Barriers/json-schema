@@ -55,6 +55,49 @@
       ]
     },
 
+    "analyticStart" : {
+      "$id": "#analyticStart",
+      "title": "Payload for a analytic start event.",
+      "description": "Payload for a analytic start event.",
+      "type": "object",
+      "required": [
+        "name",
+        "parameters",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of analytic"
+        },
+        "width": {
+          "type": "integer",
+          "description": "The width in pixels of the frames to be analysed."
+        },
+        "height": {
+          "type": "integer",
+          "description": "The height in pixels of the frames to be analysed."
+        }
+      }
+    },
+
+    "analyticEnd" : {
+      "$id": "#analyticEnd",
+      "title": "Payload for a analytic end event.",
+      "description": "Payload for a analytic end event.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of analytic"
+        }
+      }
+    },
+
     "frameStart" : {
       "$id": "#frameStart",
       "title": "Payload for a frame-start event.",
@@ -224,6 +267,87 @@
       }
     },
 
+    "alarmStart" : {
+      "$id": "#alarmStart",
+      "title": "Payload for alarmStart events.",
+      "description": "Payload for alarmStart events.",
+      "type": "object",
+      "required": [
+        "alarmId",
+        "frameNumber",
+        "sightingIds"
+      ],
+      "properties": {
+        "alarmId": {
+          "$ref": "#/definitions/guid"
+        },
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frameNumber"
+        },
+        "sightingIds":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/guid"
+          }
+        }
+      }
+    },
+
+    "alarmInProgress" : {
+      "$id": "#alarmInProgress",
+      "title": "Payload for alarmInProgress events.",
+      "description": "Payload for alarmInProgress events.",
+      "type": "object",
+      "required": [
+        "alarmId",
+        "frameNumber",
+        "sightingIds"
+      ],
+      "properties": {
+        "alarmId": {
+          "$ref": "#/definitions/guid"
+        },
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frameNumber"
+        },
+        "sightingIds":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/guid"
+          }
+        }
+      }
+    },
+
+    "alarmEnd" : {
+      "$id": "#alarmEnd",
+      "title": "Payload for alarm events.",
+      "description": "Payload for alarm events.",
+      "type": "object",
+      "required": [
+        "alarmId",
+        "frameNumber",
+        "sightingIds"
+      ],
+      "properties": {
+        "alarmId": {
+          "$ref": "#/definitions/guid"
+        },
+        "frameNumber": {
+          "type": "integer",
+          "description": "The frameNumber"
+        },
+        "sightingIds":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/guid"
+          }
+        }
+      }
+    },
+
     "peopleCounter" : {
       "$id": "#peopleCounter",
       "title": "Payload for a People Counter event.",
@@ -363,31 +487,89 @@
       "items": {
         "$ref": "#/definitions/guid"
       }
-    },
-    "eventPayload": {
-      "$id": "#eventPayload",
-      "title": "Event payload",
-      "description": "This is the payload of the event, changes depending on the event type",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/frameStart"
-        },
-        {
-          "$ref": "#/definitions/frameSkipped"
-        },
-        {
-          "$ref": "#/definitions/frameEnd"
-        },
-        {
-          "$ref": "#/definitions/tpo"
-        },
-        {
-          "$ref": "#/definitions/sighting"
-        },
-        {
-          "$ref": "#/definitions/peopleCounter"
-        }
-      ]
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "analyticStart" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/analyticStart" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "analyticEnd" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/analyticEnd" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "frameStart" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/frameStart" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "frameSkipped" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/frameSkipped" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "tpo" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/tpo" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "sighting" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/sighting" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "alarmStart" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/alarmStart" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "alarmInProgress" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/alarmInProgress" } },
+        "required": ["eventPayload"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "alarmEnd" } }
+      },
+      "then": {
+        "properties": { "eventPayload": { "$ref": "#/definitions/alarmEnd" } },
+        "required": ["eventPayload"]
+      }
+    },
+  ]
 }

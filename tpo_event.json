@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/event_schema.json#root",
+  "schemaVersion": 1,
+  "certainty": 0.71031845,
+  "detectionTime": "2023-01-16T10:36:42.725Z",
+  "eventPayload": {
+    "bbox": {
+      "h": 0.31414473,
+      "w": 0.098958336,
+      "x": 0.5703125,
+      "y": 0.18585527
+    },
+    "frameNumber": 0,
+    "length": 1,
+    "objectConfidence": 0.71031845,
+    "objectType": "person",
+    "sightingId": "40e5758d-0bde-6172-0efa-ef0820dd1c07"
+  },
+  "eventVersion": 1,
+  "id": "35dc089f-6aa6-f54e-59a8-f2ee491f6073",
+  "occurrenceTime": "2023-01-16T10:36:42.700Z",
+  "sourceId": "c62bf9a5-13a7-dc44-f611-41927684b701",
+  "type": "tpo"
+}
