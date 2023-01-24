@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/event_schema.json#root",
+  "schemaVersion": 1,
+  "certainty": 0.0,
+  "detectionTime": "2023-01-24T00:40:32.267Z",
+  "eventPayload": {
+    "height": 608,
+    "name": "vmdNano",
+    "parameters": {
+      "analytic": "ObjectDetector",
+      "display": false,
+      "gpuId": -1,
+      "id": "ddaa15d1-596c-4699-9ea5-c270dd4f3286",
+      "logLevel": "info",
+      "maxDetectionSize": 1000,
+      "maxGap": 25,
+      "maxLength": 1000,
+      "maxNumDetectors": 4,
+      "maxObjectDetectorFR": -1,
+      "minDetectionSize": 20,
+      "minLength": 3,
+      "modelPath": "/home/kieron/src/papillon/Data/ResearchModels/YoloX/yolox_nano_cloudvis.ini",
+      "name": "vmdNano",
+      "objectsToClassify": [
+        "person",
+        "vehicle"
+      ],
+      "postAlarmTimeMs": 10,
+      "regionOfInterest": {
+        "h": 0.0,
+        "type": "papillon::PRectanglef",
+        "w": 0.0,
+        "x": 0.0,
+        "y": 0.0
+      },
+      "schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#root",
+      "schemaVersion": 1,
+      "threshold": 0.25,
+      "trackerThreshold": 0.0,
+      "version": 1
+    },
+    "width": 768
+  },
+  "eventVersion": 1,
+  "id": "7e320e91-f4c0-5522-c8df-af75a584fd58",
+  "occurrenceTime": "2023-01-24T00:40:32.267Z",
+  "sourceId": "00000000-0000-0000-0000-000000000000",
+  "type": "analyticStart"
+}

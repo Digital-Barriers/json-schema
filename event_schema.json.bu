@@ -267,62 +267,8 @@
       }
     },
 
-    "alarmStart" : {
-      "$id": "#alarmStart",
-      "title": "Payload for alarmStart events.",
-      "description": "Payload for alarmStart events.",
-      "type": "object",
-      "required": [
-        "alarmId",
-        "frameNumber",
-        "sightingIds"
-      ],
-      "properties": {
-        "alarmId": {
-          "$ref": "#/definitions/guid"
-        },
-        "frameNumber": {
-          "type": "integer",
-          "description": "The frameNumber"
-        },
-        "sightingIds":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/guid"
-          }
-        }
-      }
-    },
-
-    "alarmInProgress" : {
-      "$id": "#alarmInProgress",
-      "title": "Payload for alarmInProgress events.",
-      "description": "Payload for alarmInProgress events.",
-      "type": "object",
-      "required": [
-        "alarmId",
-        "frameNumber",
-        "sightingIds"
-      ],
-      "properties": {
-        "alarmId": {
-          "$ref": "#/definitions/guid"
-        },
-        "frameNumber": {
-          "type": "integer",
-          "description": "The frameNumber"
-        },
-        "sightingIds":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/guid"
-          }
-        }
-      }
-    },
-
-    "alarmEnd" : {
-      "$id": "#alarmEnd",
+    "alarm" : {
+      "$id": "#alarm",
       "title": "Payload for alarm events.",
       "description": "Payload for alarm events.",
       "type": "object",
@@ -487,89 +433,40 @@
       "items": {
         "$ref": "#/definitions/guid"
       }
+    },
+    "eventPayload": {
+      "$id": "#eventPayload",
+      "title": "Event payload",
+      "description": "This is the payload of the event, changes depending on the event type",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/analyticStart"
+        },
+        {
+          "$ref": "#/definitions/analyticEnd"
+        },
+        {
+          "$ref": "#/definitions/frameStart"
+        },
+        {
+          "$ref": "#/definitions/frameSkipped"
+        },
+        {
+          "$ref": "#/definitions/frameEnd"
+        },
+        {
+          "$ref": "#/definitions/tpo"
+        },
+        {
+          "$ref": "#/definitions/sighting"
+        },
+        {
+          "$ref": "#/definitions/alarm"
+        },
+        {
+          "$ref": "#/definitions/peopleCounter"
+        }
+      ]
     }
-  },
-  "allOf": [
-    {
-      "if": {
-        "properties": { "type": { "const": "analyticStart" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/analyticStart" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "analyticEnd" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/analyticEnd" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "frameStart" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/frameStart" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "frameSkipped" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/frameSkipped" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "tpo" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/tpo" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "sighting" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/sighting" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "alarmStart" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/alarmStart" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "alarmInProgress" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/alarmInProgress" } },
-        "required": ["eventPayload"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "type": { "const": "alarmEnd" } }
-      },
-      "then": {
-        "properties": { "eventPayload": { "$ref": "#/definitions/alarmEnd" } },
-        "required": ["eventPayload"]
-      }
-    },
-  ]
+  }
 }

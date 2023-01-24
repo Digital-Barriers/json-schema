@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/event_schema.json#root",
+  "schemaVersion": 1,
+  "certainty": 0.0,
+  "detectionTime": "2023-01-24T00:52:44.333Z",
+  "eventPayload": {
+    "name": "vmdNano"
+  },
+  "eventVersion": 1,
+  "id": "5313c99f-4693-bf61-5b06-b1104faba951",
+  "occurrenceTime": "2023-01-24T00:52:44.333Z",
+  "sourceId": "00000000-0000-0000-0000-000000000000",
+  "type": "analyticEnd"
+}

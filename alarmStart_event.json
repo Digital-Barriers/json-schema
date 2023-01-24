@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/event_schema.json#root",
+  "schemaVersion": 1,
+  "certainty": 1.0,
+  "detectionTime": "2023-01-24T00:58:39.735Z",
+  "eventPayload": {
+    "alarmId": "f420dceb-5ad0-3125-0b5e-b267d91f8a53",
+    "frameNumber": 0,
+    "sightingIds": [
+      "281a9518-bd5b-ab6b-7820-795a5a30633a",
+      "527dd67c-e540-eb09-00d5-5fa1969aef15"
+    ]
+  },
+  "eventVersion": 1,
+  "id": "88e7f2ad-de4e-bc6d-176d-19db50aff16d",
+  "occurrenceTime": "2023-01-24T00:58:39.734Z",
+  "sourceId": "00000000-0000-0000-0000-000000000000",
+  "type": "alarmStart"
+}

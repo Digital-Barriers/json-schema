@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/event_schema.json#root",
+  "schemaVersion": 1,
+  "certainty": 0.0,
+  "detectionTime": "2023-01-23T23:14:18.024Z",
+  "eventPayload": {
+    "description": "QwACAA......",
+    "endFrame": 39,
+    "endTime": "2023-01-23T23:14:18.905Z",
+    "length": 24,
+    "objectConfidence": 0.9989231,
+    "objectType": "face",
+    "sightingId": "26de351a-9431-0a40-d8e4-c5525938fa35",
+    "startFrame": 16,
+    "startTime": "2023-01-23T23:14:18.024Z",
+    "subjectConfidence": 0.79598707,
+    "subjectId": "f5c58227-6d06-ee22-8f55-0f0401cacb68",
+    "thumbnail": "/9j/4AAQ...."
+  },
+  "eventVersion": 1,
+  "id": "a53a98b3-ef01-3c0e-8ae9-234831a5dc01",
+  "occurrenceTime": "2023-01-23T23:14:18.024Z",
+  "sourceId": "ee99d75b-90df-f84f-2adf-16052dfcbf40",
+  "type": "sighting"
+}

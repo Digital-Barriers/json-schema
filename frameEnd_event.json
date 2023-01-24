@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/event_schema.json#root",
+  "schemaVersion": 1,
+  "certainty": 0.0,
+  "detectionTime": "2023-01-24T02:50:59.154Z",
+  "eventPayload": {
+    "frameNumber": 20
+  },
+  "eventVersion": 1,
+  "id": "e67b16d6-a4ec-ab75-e882-80fd10d8f543",
+  "occurrenceTime": "2023-01-24T02:50:59.130Z",
+  "sourceId": "77ece55d-cfbf-6e0e-a48f-12e30da8d54a",
+  "type": "frameEnd"
+}
