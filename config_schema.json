@@ -407,6 +407,56 @@
           }
         }
       },
+      "dictStringListParam": {
+        "$id": "#dictStringListParam",
+        "title": "Parameter which is a dictionary of list of strings",
+        "description": "Parameter which is a dictionary of list of strings",
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "internalId",
+          "description",
+          "required",
+          "external",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PParameterDictStringList"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "internalId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "value": {
+            "type": "object",
+            "patternProperties": {
+              ".*": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
       "choice": {
         "$id": "#choice",
         "title": "Parameter of type choice ",
@@ -897,6 +947,9 @@
             },
             {
               "$ref": "#/definitions/enumListParam"
+            },
+            {
+              "$ref": "#/definitions/dictStringListParam"
             },
             {
               "$ref": "#/definitions/rectangle"
