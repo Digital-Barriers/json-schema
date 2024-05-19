@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "#root",
+  "title": "Analytics Engine",
+  "description": "A list of video analytics configurations",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The release name of this particular engine. Based on rare-element names.",
+      "enum": ["cobaltite", "sperrylite", "tantalite", "wolframite", "kunzite", "benitoite", "painite"]
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "description": "The version number of the configuration list schema",
+      "minimum": 1
+    },
+    "analytics": {
+      "type": "array",
+      "description": "An array of video analytics configurations",
+      "items": {
+        "type": "object",
+        "required": ["config", "parameters", "scenarios"],
+        "properties": {
+          "schemaVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "config": {
+            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#/definitions/config"
+          },
+          "parameters": {
+            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#/definitions/parameters"
+          },
+          "scenarios": {
+            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#/definitions/scenarios"
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "schemaVersion", "analytics"]
+}
