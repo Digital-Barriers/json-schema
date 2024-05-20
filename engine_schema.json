@@ -27,13 +27,13 @@
             "minimum": 1
           },
           "config": {
-            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#/definitions/config"
+            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/config_schema.json#/definitions/config"
           },
           "parameters": {
-            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#/definitions/parameters"
+            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/config_schema.json#/definitions/parameters"
           },
           "scenarios": {
-            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v1.0/config_schema.json#/definitions/scenarios"
+            "$ref": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/develop/config_schema.json#/definitions/scenarios"
           }
         }
       }
