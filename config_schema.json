@@ -1094,6 +1094,67 @@
           "$ref": "#/definitions/guid"
         }
       }
+    },
+    "minMaxDetectionSize": {
+      "$id": "#minMaxDetectionSize",
+      "title": "Min/Max Detection Size for Detector",
+      "description": "Specify the minimum and maximum detection in terms of percentage image height and width.",
+      "type": "object",
+      "required": [
+        "type",
+        "name",
+        "internalId",
+        "description",
+        "minWidthPercentage",
+        "maxWidthPercentage",
+        "minHeightPercentage",
+        "maxHeightPercentage",
+        "required",
+        "external"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PParameterMinMaxDetectionSize"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "internalId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "minWidthPercentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxWidthPercentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "minHeightPercentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxHeightPercentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "external": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
