@@ -1057,6 +1057,36 @@
       ],
       "default": "info"
     },
+    "runtime": {
+      "$id": "#runtime",
+      "title": "Run the analytic",
+      "description": "Information on how to run the analytic",
+      "type": "object",
+      "required": [
+        "runtimeType",
+        "image",
+        "binary"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "runtimeType": {
+          "type": "string",
+          "enum": ["host", "docker"]
+        },
+        "image": {
+          "type": "string"
+        },
+        "binary": {
+          "type": "string"
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "config": {
       "$id": "#config",
       "title": "Analytics Configuration",
@@ -1065,16 +1095,22 @@
       "required": [
         "name",
         "analytic",
+        "alarmType",
         "version",
         "logLevel",
         "id"
       ],
+      "additionalProperties": false,
       "properties": {
         "name": {
           "type": "string"
         },
         "analytic": {
-          "type": "string"
+          "type": "string",
+        },
+        "alarmType": {
+          "type": "string",
+          "enum": ["object_detector", "safezone2d", "face_recognition"]
         },
         "version": {
           "type": "integer",
@@ -1092,6 +1128,9 @@
         },
         "id": {
           "$ref": "#/definitions/guid"
+        },
+        "runtime": {
+          "$ref": "#/definitions/runtime"
         }
       }
     }
