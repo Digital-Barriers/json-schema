@@ -1,0 +1,19 @@
+id: https://digitalbarriers.com/papillon/schema/linkml/common
+name: papillon_common
+description: Shared scalar types for Papillon analytics contracts.
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  papillon: https://digitalbarriers.com/papillon/schema/
+
+default_prefix: papillon
+default_range: string
+
+imports:
+  - linkml:types
+  - linkml:array
+
+types:
+  Guid:
+    typeof: string
+    pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'

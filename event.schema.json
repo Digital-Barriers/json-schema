@@ -1,0 +1,1815 @@
+{
+    "$defs": {
+        "AlarmEndEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/AlarmEndPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "alarmEnd",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AlarmEndEvent",
+            "type": "object"
+        },
+        "AlarmEndPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "frameEnd": {
+                    "type": "integer"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "frameStart": {
+                    "type": "integer"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "scenarioId": {
+                    "type": "string"
+                },
+                "sightingIds": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "frameStart",
+                "frameEnd",
+                "alarmId",
+                "frameNumber",
+                "objectType",
+                "scenarioId",
+                "sightingIds"
+            ],
+            "title": "AlarmEndPayload",
+            "type": "object"
+        },
+        "AlarmInProgressEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmPayload"
+                        },
+                        {
+                            "$ref": "#/$defs/AlarmEndPayload"
+                        }
+                    ]
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "alarmInProgress",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AlarmInProgressEvent",
+            "type": "object"
+        },
+        "AlarmPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "scenarioId": {
+                    "type": "string"
+                },
+                "sightingIds": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "alarmId",
+                "frameNumber",
+                "objectType",
+                "scenarioId",
+                "sightingIds"
+            ],
+            "title": "AlarmPayload",
+            "type": "object"
+        },
+        "AlarmStartEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmPayload"
+                        },
+                        {
+                            "$ref": "#/$defs/AlarmEndPayload"
+                        }
+                    ]
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "alarmStart",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AlarmStartEvent",
+            "type": "object"
+        },
+        "AnalyticEndEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/AnalyticEndPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "analyticEnd",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AnalyticEndEvent",
+            "type": "object"
+        },
+        "AnalyticEndPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "AnalyticEndPayload",
+            "type": "object"
+        },
+        "AnalyticStartEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/AnalyticStartPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "analyticStart",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AnalyticStartEvent",
+            "type": "object"
+        },
+        "AnalyticStartPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "height": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "$ref": "#/$defs/Any"
+                },
+                "width": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name",
+                "parameters",
+                "width",
+                "height"
+            ],
+            "title": "AnalyticStartPayload",
+            "type": "object"
+        },
+        "Any": {
+            "additionalProperties": true,
+            "description": "",
+            "title": "Any",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ArrayLinearizationOrderOptions": {
+            "description": "Determines how a linear contiguous representation of the elements of an array map to array indices",
+            "enum": [
+                "COLUMN_MAJOR_ARRAY_ORDER",
+                "ROW_MAJOR_ARRAY_ORDER"
+            ],
+            "title": "ArrayLinearizationOrderOptions",
+            "type": "string"
+        },
+        "BoundingBox": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "h": {
+                    "type": "number"
+                },
+                "type": {
+                    "const": "papillon::PRectanglef",
+                    "type": "string"
+                },
+                "w": {
+                    "type": "number"
+                },
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type",
+                "x",
+                "y",
+                "w",
+                "h"
+            ],
+            "title": "BoundingBox",
+            "type": "object"
+        },
+        "ColumnOrderedArray": {
+            "additionalProperties": false,
+            "description": "An array ordering that is column-order",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                }
+            },
+            "title": "ColumnOrderedArray",
+            "type": "object"
+        },
+        "DataArray": {
+            "additionalProperties": false,
+            "description": "a data structure containing an NDArray and a set of one-dimensional series that are used to label the elements of the array",
+            "properties": {
+                "array": {
+                    "$ref": "#/$defs/OneDimensionalSeries",
+                    "description": "An array that is labeled by a set of one-dimensional series"
+                },
+                "axis": {
+                    "$ref": "#/$defs/OneDimensionalSeries",
+                    "description": "A one-dimensional series that contains elements that form one part of a tuple used to access an array"
+                }
+            },
+            "required": [
+                "axis",
+                "array"
+            ],
+            "title": "DataArray",
+            "type": "object"
+        },
+        "DataStructure": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "DataStructure",
+            "type": "object"
+        },
+        "Event": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/Any"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime"
+            ],
+            "title": "Event",
+            "type": "object"
+        },
+        "EventDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "oneOf": [
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AnalyticStartEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AnalyticEndEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FrameStartEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FrameSkippedEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FrameEndEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TpoEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SightingEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TpoAlarmStartEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TpoAlarmEndEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmStartEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmInProgressEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmEndEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PeopleCounterEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ExtensionEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            ],
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/Any"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime"
+            ],
+            "title": "EventDocument",
+            "type": "object"
+        },
+        "ExtensionEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/Any"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "pattern": "^(?!(?:analyticStart|analyticEnd|frameStart|frameSkipped|frameEnd|tpo|sighting|tpoAlarmStart|tpoAlarmEnd|alarmStart|alarmInProgress|alarmEnd|peopleCounter)$).+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime"
+            ],
+            "title": "ExtensionEvent",
+            "type": "object"
+        },
+        "FrameEndEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/FrameNumberPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "frameEnd",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "FrameEndEvent",
+            "type": "object"
+        },
+        "FrameNumberPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "frameNumber": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "frameNumber"
+            ],
+            "title": "FrameNumberPayload",
+            "type": "object"
+        },
+        "FrameSkippedEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/FrameNumberPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "frameSkipped",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "FrameSkippedEvent",
+            "type": "object"
+        },
+        "FrameStartEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/FrameStartPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "frameStart",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "FrameStartEvent",
+            "type": "object"
+        },
+        "FrameStartPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "frameHeight": {
+                    "type": "integer"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "frameWidth": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "frameNumber"
+            ],
+            "title": "FrameStartPayload",
+            "type": "object"
+        },
+        "GroupingByArrayOrder": {
+            "additionalProperties": false,
+            "description": "A mixin that describes an array whose elements are mapped from a linear sequence to an array index via a specified mapping",
+            "title": "GroupingByArrayOrder",
+            "type": "object"
+        },
+        "NDArray": {
+            "additionalProperties": false,
+            "description": "a data structure consisting of a collection of *elements*, each identified by at least one array index tuple.",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                },
+                "dimensions": {
+                    "description": "The number of elements in the tuple used to access elements of an array",
+                    "type": "integer"
+                },
+                "elements": {
+                    "description": "the collection of values that make up the array. The elements have a *direct* representation which is an ordered sequence of values. The elements also have an *array interpretation*, where each element has a unique index which is determined by array_linearization_order",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "elements"
+            ],
+            "title": "NDArray",
+            "type": "object"
+        },
+        "OneDimensionalSeries": {
+            "additionalProperties": false,
+            "description": "an NDArray whose dimensionality is constrained to 1",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                },
+                "dimensions": {
+                    "const": 1,
+                    "description": "The number of elements in the tuple used to access elements of an array",
+                    "type": "integer"
+                },
+                "elements": {
+                    "description": "the collection of values that make up the array. The elements have a *direct* representation which is an ordered sequence of values. The elements also have an *array interpretation*, where each element has a unique index which is determined by array_linearization_order",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "elements"
+            ],
+            "title": "OneDimensionalSeries",
+            "type": "object"
+        },
+        "PeopleCounterEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/PeopleCounterPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "peopleCounter",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "PeopleCounterEvent",
+            "type": "object"
+        },
+        "PeopleCounterPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "direction": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "direction",
+                "number"
+            ],
+            "title": "PeopleCounterPayload",
+            "type": "object"
+        },
+        "RowOrderedArray": {
+            "additionalProperties": false,
+            "description": "An array ordering that is row-order or generalizations thereof",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                }
+            },
+            "title": "RowOrderedArray",
+            "type": "object"
+        },
+        "SightingEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/SightingPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "sighting",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "SightingEvent",
+            "type": "object"
+        },
+        "SightingPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "descriptionFrameNumber": {
+                    "type": "integer"
+                },
+                "endFrame": {
+                    "type": "integer"
+                },
+                "endTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "length": {
+                    "type": "integer"
+                },
+                "objectConfidence": {
+                    "type": "number"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "sightingId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "startFrame": {
+                    "type": "integer"
+                },
+                "startTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "stationary": {
+                    "type": "boolean"
+                },
+                "subjectConfidence": {
+                    "type": "number"
+                },
+                "subjectDescription": {
+                    "type": "string"
+                },
+                "subjectId": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "objectType",
+                "objectConfidence",
+                "startFrame",
+                "endFrame",
+                "startTime",
+                "endTime",
+                "sightingId",
+                "length"
+            ],
+            "title": "SightingPayload",
+            "type": "object"
+        },
+        "TpoAlarmEndEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/TpoAlarmPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "tpoAlarmEnd",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "TpoAlarmEndEvent",
+            "type": "object"
+        },
+        "TpoAlarmPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "scenarioId": {
+                    "type": "string"
+                },
+                "sightingId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "alarmId",
+                "frameNumber",
+                "objectType",
+                "scenarioId",
+                "sightingId"
+            ],
+            "title": "TpoAlarmPayload",
+            "type": "object"
+        },
+        "TpoAlarmStartEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/TpoAlarmPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "tpoAlarmStart",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "TpoAlarmStartEvent",
+            "type": "object"
+        },
+        "TpoEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/TpoPayload"
+                },
+                "eventVersion": {
+                    "const": 1,
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "tpo",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "TpoEvent",
+            "type": "object"
+        },
+        "TpoPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "bbox": {
+                    "$ref": "#/$defs/BoundingBox"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "descriptionFrameNumber": {
+                    "type": "integer"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "is_static": {
+                    "type": "boolean"
+                },
+                "length": {
+                    "type": "integer"
+                },
+                "maintained": {
+                    "type": "boolean"
+                },
+                "motionConfidence": {
+                    "type": "number"
+                },
+                "objectConfidence": {
+                    "type": "number"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "sightingId": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "objectType",
+                "objectConfidence",
+                "bbox",
+                "frameNumber",
+                "sightingId",
+                "length"
+            ],
+            "title": "TpoPayload",
+            "type": "object"
+        }
+    },
+    "$id": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/event.schema.json",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": false,
+    "description": "",
+    "metamodel_version": "1.11.0",
+    "oneOf": [
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AnalyticStartEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AnalyticEndEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/FrameStartEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/FrameSkippedEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/FrameEndEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/TpoEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/SightingEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/TpoAlarmStartEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/TpoAlarmEndEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AlarmStartEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AlarmInProgressEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AlarmEndEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/PeopleCounterEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/ExtensionEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "ancestors": {
+            "items": {
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "annotation": {
+            "type": "string"
+        },
+        "certainty": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+        },
+        "detectionTime": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "eventPayload": {
+            "$ref": "#/$defs/Any"
+        },
+        "eventVersion": {
+            "const": 1,
+            "type": "integer"
+        },
+        "id": {
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string"
+        },
+        "occurrenceTime": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "sourceId": {
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string"
+        },
+        "sourceName": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "eventVersion",
+        "type",
+        "id",
+        "sourceId",
+        "occurrenceTime"
+    ],
+    "title": "EventDocument",
+    "type": "object",
+    "version": null
+}

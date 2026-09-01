@@ -1,0 +1,12 @@
+{
+  "type": "PParameterBanana",
+  "name": "Unknown parameter",
+  "internalId": "unknownParameter",
+  "description": "The discriminator is not part of the hierarchy.",
+  "required": false,
+  "external": true,
+  "minValue": 0,
+  "maxValue": 10,
+  "stepValue": 1,
+  "value": 5
+}

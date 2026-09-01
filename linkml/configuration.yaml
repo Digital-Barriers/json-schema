@@ -1,0 +1,222 @@
+id: https://digitalbarriers.com/papillon/schema/linkml/configuration
+name: papillon_configuration
+description: Papillon analytic, scenario, and assembled engine documents.
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  papillon: https://digitalbarriers.com/papillon/schema/
+
+default_prefix: papillon
+default_range: string
+
+imports:
+  - parameters
+
+enums:
+  AlarmType:
+    permissible_values:
+      anpr:
+      face_recognition:
+      galileo:
+      object_detector:
+      rtmdet:
+      safezone2d:
+  LogLevel:
+    permissible_values:
+      trace:
+      debug:
+      info:
+      warning:
+      error:
+      fatal:
+
+slots:
+  schema_uri:
+    alias: $schema
+    range: uri
+    required: true
+  scenario_type:
+    alias: type
+    range: string
+    required: true
+  schemaVersion:
+    range: integer
+    required: true
+    equals_number: 2
+  config:
+    range: AnalyticConfig
+    required: true
+  parameters:
+    range: Parameter
+    multivalued: true
+    inlined_as_list: true
+    required: true
+  scenarioReferences:
+    alias: scenarios
+    range: string
+    multivalued: true
+    inlined_as_list: true
+  engineScenarios:
+    alias: scenarios
+    range: EmbeddedScenario
+    multivalued: true
+    inlined_as_list: true
+  analytic:
+    range: string
+    required: true
+  alarmType:
+    range: AlarmType
+    required: true
+  version:
+    range: integer
+    required: true
+  logLevel:
+    range: LogLevel
+    required: true
+  display:
+    range: boolean
+    required: true
+  id:
+    range: Guid
+    required: true
+  runtime:
+    range: RuntimeConfiguration
+  runtimeType:
+    range: string
+    required: true
+  image:
+    range: string
+    required: true
+  binary:
+    range: string
+    required: true
+  commandLineOptions:
+    range: string
+    multivalued: true
+    inlined_as_list: true
+  environmentVariables:
+    range: string
+    multivalued: true
+    inlined_as_list: true
+  zoneId:
+    range: string
+  fromZoneId:
+    range: string
+  toZoneId:
+    range: string
+  analytics:
+    range: AnalyticConfigurationDocument
+    multivalued: true
+    inlined_as_list: true
+    required: true
+
+classes:
+  RuntimeConfiguration:
+    slots:
+      - runtimeType
+      - image
+      - binary
+      - commandLineOptions
+      - environmentVariables
+
+  AnalyticConfig:
+    slots:
+      - name
+      - analytic
+      - alarmType
+      - version
+      - logLevel
+      - display
+      - id
+      - runtime
+
+  AnalyticConfigurationDocument:
+    tree_root: true
+    slots:
+      - schema_uri
+      - schemaVersion
+      - config
+      - parameters
+      - scenarioReferences
+    slot_usage:
+      schema_uri:
+        equals_string: https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/analytic-configuration.schema.json
+
+  Scenario:
+    abstract: true
+    slots:
+      - schema_uri
+      - schemaVersion
+      - scenario_type
+      - name
+      - internalId
+      - description
+      - required
+      - external
+      - enabled
+      - parameters
+      - zoneId
+      - fromZoneId
+      - toZoneId
+    slot_usage:
+      schema_uri:
+        required: false
+      schemaVersion:
+        required: false
+
+  PScenarioIntrusion:
+    is_a: Scenario
+    slot_usage:
+      scenario_type:
+        equals_string: PScenarioIntrusion
+      zoneId:
+        required: true
+      fromZoneId:
+        value_presence: ABSENT
+      toZoneId:
+        value_presence: ABSENT
+
+  PScenarioZoneCrossing:
+    is_a: Scenario
+    slot_usage:
+      scenario_type:
+        equals_string: PScenarioZoneCrossing
+      zoneId:
+        value_presence: ABSENT
+      fromZoneId:
+        required: true
+      toZoneId:
+        required: true
+
+  ScenarioDocument:
+    is_a: Scenario
+    tree_root: true
+    slot_usage:
+      schema_uri:
+        required: true
+        equals_string: https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/scenario.schema.json
+      schemaVersion:
+        required: true
+    exactly_one_of:
+      - is_a: PScenarioIntrusion
+      - is_a: PScenarioZoneCrossing
+
+  EmbeddedScenario:
+    is_a: Scenario
+    exactly_one_of:
+      - is_a: PScenarioIntrusion
+      - is_a: PScenarioZoneCrossing
+
+  AnalyticEngineConfigurationDocument:
+    tree_root: true
+    slots:
+      - schema_uri
+      - schemaVersion
+      - name
+      - analytics
+      - engineScenarios
+    slot_usage:
+      schema_uri:
+        equals_string: https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/analytic-engine-configuration.schema.json
+      engineScenarios:
+        required: true

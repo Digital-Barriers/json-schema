@@ -1,0 +1,422 @@
+id: https://digitalbarriers.com/papillon/schema/linkml/parameters
+name: papillon_parameters
+description: Runtime-supported Papillon analytic parameters and zones.
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  papillon: https://digitalbarriers.com/papillon/schema/
+
+default_prefix: papillon
+default_range: string
+
+imports:
+  - common
+
+slots:
+  type:
+    range: string
+    required: true
+    designates_type: true
+  contour_type:
+    alias: type
+    range: string
+    required: true
+  name:
+    range: string
+    required: true
+  internalId:
+    range: string
+    required: true
+  description:
+    range: string
+    required: true
+  required:
+    range: boolean
+    required: true
+  external:
+    range: boolean
+    required: true
+  enabled:
+    range: boolean
+    required: true
+  value:
+    range: Any
+    required: true
+  possibleValues:
+    range: Any
+    required: true
+  minValue:
+    range: float
+    required: true
+  maxValue:
+    range: float
+    required: true
+  stepValue:
+    range: float
+    required: true
+  x:
+    range: float
+    required: true
+  y:
+    range: float
+    required: true
+  w:
+    range: float
+    required: true
+  h:
+    range: float
+    required: true
+  imageWidth:
+    range: integer
+    required: true
+    minimum_value: 0
+  imageHeight:
+    range: integer
+    required: true
+    minimum_value: 0
+  contour:
+    range: Any
+    required: true
+  pts:
+    range: Point
+    multivalued: true
+    inlined_as_list: true
+    required: true
+  grid:
+    range: Rectangle
+    multivalued: true
+    inlined_as_list: true
+    required: true
+  boxWidth:
+    range: float
+    required: true
+  boxHeight:
+    range: float
+    required: true
+  minWidthPercentage:
+    range: integer
+    required: true
+    minimum_value: 0
+    maximum_value: 100
+  maxWidthPercentage:
+    range: integer
+    required: true
+    minimum_value: 0
+    maximum_value: 100
+  minHeightPercentage:
+    range: integer
+    required: true
+    minimum_value: 0
+    maximum_value: 100
+  maxHeightPercentage:
+    range: integer
+    required: true
+    minimum_value: 0
+    maximum_value: 100
+
+classes:
+  Point:
+    slots:
+      - x
+      - y
+
+  Rectangle:
+    slots:
+      - x
+      - y
+      - w
+      - h
+
+  RectangleContour:
+    slots:
+      - contour_type
+      - x
+      - y
+      - w
+      - h
+    slot_usage:
+      contour_type:
+        equals_string: rectangle
+
+  PolygonContour:
+    slots:
+      - contour_type
+      - pts
+    slot_usage:
+      contour_type:
+        equals_string: polygon
+
+  GridContour:
+    slots:
+      - contour_type
+      - grid
+    slot_usage:
+      contour_type:
+        equals_string: grid
+
+  FixedGridContour:
+    slots:
+      - contour_type
+      - pts
+      - boxWidth
+      - boxHeight
+    slot_usage:
+      contour_type:
+        equals_string: fixedGrid
+
+  Parameter:
+    abstract: true
+    slots:
+      - type
+      - name
+      - internalId
+      - description
+      - required
+      - external
+
+  PParameter:
+    is_a: Parameter
+    slot_usage:
+      type:
+        equals_string: PParameter
+
+  PParameterBool:
+    is_a: Parameter
+    slots:
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterBool
+      value:
+        range: boolean
+
+  PParameterInt:
+    is_a: Parameter
+    slots:
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterInt
+      value:
+        range: integer
+
+  PParameterFloat:
+    is_a: Parameter
+    slots:
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterFloat
+      value:
+        range: float
+
+  PParameterString:
+    is_a: Parameter
+    slots:
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterString
+      value:
+        range: string
+
+  PParameterModelPath:
+    is_a: PParameterString
+    slot_usage:
+      type:
+        equals_string: PParameterModelPath
+
+  PParameterStringList:
+    is_a: Parameter
+    slots:
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterStringList
+      value:
+        range: string
+        multivalued: true
+        inlined_as_list: true
+
+  PParameterGroup:
+    is_a: PParameterStringList
+    slot_usage:
+      type:
+        equals_string: PParameterGroup
+
+  PParameterDictStringList:
+    is_a: Parameter
+    slots:
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterDictStringList
+      value:
+        range: Any
+
+  PParameterRectangle:
+    is_a: Parameter
+    slots:
+      - x
+      - y
+      - w
+      - h
+    slot_usage:
+      type:
+        equals_string: PParameterRectangle
+
+  PParameterEnum:
+    is_a: Parameter
+    slots:
+      - possibleValues
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterEnum
+      possibleValues:
+        range: string
+        multivalued: true
+        inlined_as_list: true
+      value:
+        range: string
+
+  PParameterEnumList:
+    is_a: Parameter
+    slots:
+      - possibleValues
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterEnumList
+      possibleValues:
+        range: string
+        multivalued: true
+        inlined_as_list: true
+      value:
+        range: string
+        multivalued: true
+        inlined_as_list: true
+
+  PParameterChoiceInt:
+    is_a: Parameter
+    slots:
+      - possibleValues
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterChoiceInt
+      possibleValues:
+        range: Any
+      value:
+        range: integer
+
+  PParameterChoiceFloat:
+    is_a: Parameter
+    slots:
+      - possibleValues
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterChoiceFloat
+      possibleValues:
+        range: Any
+      value:
+        range: float
+
+  PParameterRangeInt:
+    is_a: Parameter
+    slots:
+      - minValue
+      - maxValue
+      - stepValue
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterRangeInt
+      minValue:
+        range: integer
+      maxValue:
+        range: integer
+      stepValue:
+        range: integer
+      value:
+        range: integer
+
+  PParameterRangeFloat:
+    is_a: Parameter
+    slots:
+      - minValue
+      - maxValue
+      - stepValue
+      - value
+    slot_usage:
+      type:
+        equals_string: PParameterRangeFloat
+      value:
+        range: float
+
+  PParameterMinMaxDetectionSize:
+    is_a: Parameter
+    slots:
+      - minWidthPercentage
+      - maxWidthPercentage
+      - minHeightPercentage
+      - maxHeightPercentage
+    slot_usage:
+      type:
+        equals_string: PParameterMinMaxDetectionSize
+
+  PParameterImageFormat:
+    is_a: PParameterEnum
+    slot_usage:
+      type:
+        equals_string: PParameterImageFormat
+
+  PZone:
+    is_a: Parameter
+    slots:
+      - imageWidth
+      - imageHeight
+    slot_usage:
+      type:
+        equals_string: PZone
+
+  PZoneRectangle:
+    is_a: PZone
+    slots:
+      - contour
+    slot_usage:
+      type:
+        equals_string: PZoneRectangle
+      contour:
+        range: RectangleContour
+
+  PZonePolygon:
+    is_a: PZone
+    slots:
+      - contour
+    slot_usage:
+      type:
+        equals_string: PZonePolygon
+      contour:
+        range: PolygonContour
+
+  PZoneGrid:
+    is_a: PZone
+    slots:
+      - contour
+    slot_usage:
+      type:
+        equals_string: PZoneGrid
+      contour:
+        range: GridContour
+
+  PZoneFixedGrid:
+    is_a: PZone
+    slots:
+      - contour
+    slot_usage:
+      type:
+        equals_string: PZoneFixedGrid
+      contour:
+        range: FixedGridContour

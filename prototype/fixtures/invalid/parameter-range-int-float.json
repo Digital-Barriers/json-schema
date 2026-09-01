@@ -1,0 +1,12 @@
+{
+  "type": "PParameterRangeInt",
+  "name": "Invalid integer range",
+  "internalId": "invalidIntegerRange",
+  "description": "An integer discriminator with floating-point values.",
+  "required": false,
+  "external": true,
+  "minValue": 0.0,
+  "maxValue": 1.0,
+  "stepValue": 0.1,
+  "value": 0.5
+}

@@ -1,0 +1,2500 @@
+{
+    "$defs": {
+        "AlarmType": {
+            "description": "",
+            "enum": [
+                "anpr",
+                "face_recognition",
+                "galileo",
+                "object_detector",
+                "rtmdet",
+                "safezone2d"
+            ],
+            "title": "AlarmType",
+            "type": "string"
+        },
+        "AnalyticConfig": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmType": {
+                    "$ref": "#/$defs/AlarmType"
+                },
+                "analytic": {
+                    "type": "string"
+                },
+                "display": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
+                },
+                "logLevel": {
+                    "$ref": "#/$defs/LogLevel"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "runtime": {
+                    "$ref": "#/$defs/RuntimeConfiguration"
+                },
+                "version": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name",
+                "analytic",
+                "alarmType",
+                "version",
+                "logLevel",
+                "display",
+                "id"
+            ],
+            "title": "AnalyticConfig",
+            "type": "object"
+        },
+        "AnalyticConfigurationDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "$schema": {
+                    "const": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/analytic-configuration.schema.json",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "config": {
+                    "$ref": "#/$defs/AnalyticConfig"
+                },
+                "parameters": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PParameter"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterBool"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterString"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterDictStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnum"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnumList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                            },
+                            {
+                                "$ref": "#/$defs/PZone"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PZonePolygon"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneFixedGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterImageFormat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterGroup"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterModelPath"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "scenarios": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "$schema",
+                "schemaVersion",
+                "config",
+                "parameters"
+            ],
+            "title": "AnalyticConfigurationDocument",
+            "type": "object"
+        },
+        "AnalyticEngineConfigurationDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "$schema": {
+                    "const": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/analytic-engine-configuration.schema.json",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "analytics": {
+                    "items": {
+                        "$ref": "#/$defs/AnalyticConfigurationDocument"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "scenarios": {
+                    "items": {
+                        "$ref": "#/$defs/EmbeddedScenario"
+                    },
+                    "type": "array"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "$schema",
+                "schemaVersion",
+                "name",
+                "analytics",
+                "scenarios"
+            ],
+            "title": "AnalyticEngineConfigurationDocument",
+            "type": "object"
+        },
+        "Any": {
+            "additionalProperties": true,
+            "description": "",
+            "title": "Any",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ArrayLinearizationOrderOptions": {
+            "description": "Determines how a linear contiguous representation of the elements of an array map to array indices",
+            "enum": [
+                "COLUMN_MAJOR_ARRAY_ORDER",
+                "ROW_MAJOR_ARRAY_ORDER"
+            ],
+            "title": "ArrayLinearizationOrderOptions",
+            "type": "string"
+        },
+        "ColumnOrderedArray": {
+            "additionalProperties": false,
+            "description": "An array ordering that is column-order",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                }
+            },
+            "title": "ColumnOrderedArray",
+            "type": "object"
+        },
+        "DataArray": {
+            "additionalProperties": false,
+            "description": "a data structure containing an NDArray and a set of one-dimensional series that are used to label the elements of the array",
+            "properties": {
+                "array": {
+                    "$ref": "#/$defs/OneDimensionalSeries",
+                    "description": "An array that is labeled by a set of one-dimensional series"
+                },
+                "axis": {
+                    "$ref": "#/$defs/OneDimensionalSeries",
+                    "description": "A one-dimensional series that contains elements that form one part of a tuple used to access an array"
+                }
+            },
+            "required": [
+                "axis",
+                "array"
+            ],
+            "title": "DataArray",
+            "type": "object"
+        },
+        "DataStructure": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "DataStructure",
+            "type": "object"
+        },
+        "EmbeddedScenario": {
+            "additionalProperties": false,
+            "description": "",
+            "oneOf": [
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PScenarioIntrusion"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PScenarioZoneCrossing"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            ],
+            "properties": {
+                "$schema": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "fromZoneId": {
+                    "type": "string"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PParameter"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterBool"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterString"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterDictStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnum"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnumList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                            },
+                            {
+                                "$ref": "#/$defs/PZone"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PZonePolygon"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneFixedGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterImageFormat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterGroup"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterModelPath"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                },
+                "toZoneId": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external",
+                "enabled",
+                "parameters"
+            ],
+            "title": "EmbeddedScenario",
+            "type": "object"
+        },
+        "FixedGridContour": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "boxHeight": {
+                    "type": "number"
+                },
+                "boxWidth": {
+                    "type": "number"
+                },
+                "pts": {
+                    "items": {
+                        "$ref": "#/$defs/Point"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "const": "fixedGrid",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "pts",
+                "boxWidth",
+                "boxHeight"
+            ],
+            "title": "FixedGridContour",
+            "type": "object"
+        },
+        "GridContour": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "grid": {
+                    "items": {
+                        "$ref": "#/$defs/Rectangle"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "const": "grid",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "grid"
+            ],
+            "title": "GridContour",
+            "type": "object"
+        },
+        "GroupingByArrayOrder": {
+            "additionalProperties": false,
+            "description": "A mixin that describes an array whose elements are mapped from a linear sequence to an array index via a specified mapping",
+            "title": "GroupingByArrayOrder",
+            "type": "object"
+        },
+        "LogLevel": {
+            "description": "",
+            "enum": [
+                "trace",
+                "debug",
+                "info",
+                "warning",
+                "error",
+                "fatal"
+            ],
+            "title": "LogLevel",
+            "type": "string"
+        },
+        "NDArray": {
+            "additionalProperties": false,
+            "description": "a data structure consisting of a collection of *elements*, each identified by at least one array index tuple.",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                },
+                "dimensions": {
+                    "description": "The number of elements in the tuple used to access elements of an array",
+                    "type": "integer"
+                },
+                "elements": {
+                    "description": "the collection of values that make up the array. The elements have a *direct* representation which is an ordered sequence of values. The elements also have an *array interpretation*, where each element has a unique index which is determined by array_linearization_order",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "elements"
+            ],
+            "title": "NDArray",
+            "type": "object"
+        },
+        "OneDimensionalSeries": {
+            "additionalProperties": false,
+            "description": "an NDArray whose dimensionality is constrained to 1",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                },
+                "dimensions": {
+                    "const": 1,
+                    "description": "The number of elements in the tuple used to access elements of an array",
+                    "type": "integer"
+                },
+                "elements": {
+                    "description": "the collection of values that make up the array. The elements have a *direct* representation which is an ordered sequence of values. The elements also have an *array interpretation*, where each element has a unique index which is determined by array_linearization_order",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "elements"
+            ],
+            "title": "OneDimensionalSeries",
+            "type": "object"
+        },
+        "PParameter": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameter",
+                    "enum": [
+                        "PParameter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameter",
+            "type": "object"
+        },
+        "PParameterBool": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterBool",
+                    "enum": [
+                        "PParameterBool"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterBool",
+            "type": "object"
+        },
+        "PParameterChoiceFloat": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "$ref": "#/$defs/Any"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterChoiceFloat",
+                    "enum": [
+                        "PParameterChoiceFloat"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "possibleValues",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterChoiceFloat",
+            "type": "object"
+        },
+        "PParameterChoiceInt": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "$ref": "#/$defs/Any"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterChoiceInt",
+                    "enum": [
+                        "PParameterChoiceInt"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "possibleValues",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterChoiceInt",
+            "type": "object"
+        },
+        "PParameterDictStringList": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterDictStringList",
+                    "enum": [
+                        "PParameterDictStringList"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/$defs/Any"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterDictStringList",
+            "type": "object"
+        },
+        "PParameterEnum": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterEnum",
+                    "enum": [
+                        "PParameterEnum"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "possibleValues",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterEnum",
+            "type": "object"
+        },
+        "PParameterEnumList": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterEnumList",
+                    "enum": [
+                        "PParameterEnumList"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "possibleValues",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterEnumList",
+            "type": "object"
+        },
+        "PParameterFloat": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterFloat",
+                    "enum": [
+                        "PParameterFloat"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterFloat",
+            "type": "object"
+        },
+        "PParameterGroup": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterGroup",
+                    "enum": [
+                        "PParameterGroup"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterGroup",
+            "type": "object"
+        },
+        "PParameterImageFormat": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterImageFormat",
+                    "enum": [
+                        "PParameterImageFormat"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "possibleValues",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterImageFormat",
+            "type": "object"
+        },
+        "PParameterInt": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterInt",
+                    "enum": [
+                        "PParameterInt"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterInt",
+            "type": "object"
+        },
+        "PParameterMinMaxDetectionSize": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "maxHeightPercentage": {
+                    "maximum": 100,
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "maxWidthPercentage": {
+                    "maximum": 100,
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "minHeightPercentage": {
+                    "maximum": 100,
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "minWidthPercentage": {
+                    "maximum": 100,
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterMinMaxDetectionSize",
+                    "enum": [
+                        "PParameterMinMaxDetectionSize"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "minWidthPercentage",
+                "maxWidthPercentage",
+                "minHeightPercentage",
+                "maxHeightPercentage",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterMinMaxDetectionSize",
+            "type": "object"
+        },
+        "PParameterModelPath": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterModelPath",
+                    "enum": [
+                        "PParameterModelPath"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterModelPath",
+            "type": "object"
+        },
+        "PParameterRangeFloat": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "maxValue": {
+                    "type": "number"
+                },
+                "minValue": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "stepValue": {
+                    "type": "number"
+                },
+                "type": {
+                    "const": "PParameterRangeFloat",
+                    "enum": [
+                        "PParameterRangeFloat"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "minValue",
+                "maxValue",
+                "stepValue",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterRangeFloat",
+            "type": "object"
+        },
+        "PParameterRangeInt": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "maxValue": {
+                    "type": "integer"
+                },
+                "minValue": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "stepValue": {
+                    "type": "integer"
+                },
+                "type": {
+                    "const": "PParameterRangeInt",
+                    "enum": [
+                        "PParameterRangeInt"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "minValue",
+                "maxValue",
+                "stepValue",
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterRangeInt",
+            "type": "object"
+        },
+        "PParameterRectangle": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "h": {
+                    "type": "number"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterRectangle",
+                    "enum": [
+                        "PParameterRectangle"
+                    ],
+                    "type": "string"
+                },
+                "w": {
+                    "type": "number"
+                },
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "x",
+                "y",
+                "w",
+                "h",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterRectangle",
+            "type": "object"
+        },
+        "PParameterString": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterString",
+                    "enum": [
+                        "PParameterString"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterString",
+            "type": "object"
+        },
+        "PParameterStringList": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PParameterStringList",
+                    "enum": [
+                        "PParameterStringList"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "value",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterStringList",
+            "type": "object"
+        },
+        "PScenarioIntrusion": {
+            "additionalProperties": false,
+            "description": "",
+            "not": {
+                "required": [
+                    "fromZoneId",
+                    "toZoneId"
+                ]
+            },
+            "properties": {
+                "$schema": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "fromZoneId": {
+                    "type": "string"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PParameter"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterBool"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterString"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterDictStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnum"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnumList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                            },
+                            {
+                                "$ref": "#/$defs/PZone"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PZonePolygon"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneFixedGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterImageFormat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterGroup"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterModelPath"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                },
+                "toZoneId": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "PScenarioIntrusion",
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external",
+                "enabled",
+                "parameters",
+                "zoneId"
+            ],
+            "title": "PScenarioIntrusion",
+            "type": "object"
+        },
+        "PScenarioZoneCrossing": {
+            "additionalProperties": false,
+            "description": "",
+            "not": {
+                "required": [
+                    "zoneId"
+                ]
+            },
+            "properties": {
+                "$schema": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "fromZoneId": {
+                    "type": "string"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PParameter"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterBool"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterString"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterDictStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnum"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnumList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                            },
+                            {
+                                "$ref": "#/$defs/PZone"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PZonePolygon"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneFixedGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterImageFormat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterGroup"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterModelPath"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                },
+                "toZoneId": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "PScenarioZoneCrossing",
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external",
+                "enabled",
+                "parameters",
+                "fromZoneId",
+                "toZoneId"
+            ],
+            "title": "PScenarioZoneCrossing",
+            "type": "object"
+        },
+        "PZone": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "imageHeight": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "imageWidth": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PZone",
+                    "enum": [
+                        "PZone"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "imageWidth",
+                "imageHeight",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PZone",
+            "type": "object"
+        },
+        "PZoneFixedGrid": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "contour": {
+                    "$ref": "#/$defs/FixedGridContour"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "imageHeight": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "imageWidth": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PZoneFixedGrid",
+                    "enum": [
+                        "PZoneFixedGrid"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contour",
+                "imageWidth",
+                "imageHeight",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PZoneFixedGrid",
+            "type": "object"
+        },
+        "PZoneGrid": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "contour": {
+                    "$ref": "#/$defs/GridContour"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "imageHeight": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "imageWidth": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PZoneGrid",
+                    "enum": [
+                        "PZoneGrid"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contour",
+                "imageWidth",
+                "imageHeight",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PZoneGrid",
+            "type": "object"
+        },
+        "PZonePolygon": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "contour": {
+                    "$ref": "#/$defs/PolygonContour"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "imageHeight": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "imageWidth": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PZonePolygon",
+                    "enum": [
+                        "PZonePolygon"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contour",
+                "imageWidth",
+                "imageHeight",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PZonePolygon",
+            "type": "object"
+        },
+        "PZoneRectangle": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "contour": {
+                    "$ref": "#/$defs/RectangleContour"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "imageHeight": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "imageWidth": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "const": "PZoneRectangle",
+                    "enum": [
+                        "PZoneRectangle"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contour",
+                "imageWidth",
+                "imageHeight",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PZoneRectangle",
+            "type": "object"
+        },
+        "Parameter": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "Parameter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "Parameter",
+            "type": "object"
+        },
+        "Point": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "x",
+                "y"
+            ],
+            "title": "Point",
+            "type": "object"
+        },
+        "PolygonContour": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "pts": {
+                    "items": {
+                        "$ref": "#/$defs/Point"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "const": "polygon",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "pts"
+            ],
+            "title": "PolygonContour",
+            "type": "object"
+        },
+        "Rectangle": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "h": {
+                    "type": "number"
+                },
+                "w": {
+                    "type": "number"
+                },
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "x",
+                "y",
+                "w",
+                "h"
+            ],
+            "title": "Rectangle",
+            "type": "object"
+        },
+        "RectangleContour": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "h": {
+                    "type": "number"
+                },
+                "type": {
+                    "const": "rectangle",
+                    "type": "string"
+                },
+                "w": {
+                    "type": "number"
+                },
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type",
+                "x",
+                "y",
+                "w",
+                "h"
+            ],
+            "title": "RectangleContour",
+            "type": "object"
+        },
+        "RowOrderedArray": {
+            "additionalProperties": false,
+            "description": "An array ordering that is row-order or generalizations thereof",
+            "properties": {
+                "array_linearization_order": {
+                    "$ref": "#/$defs/ArrayLinearizationOrderOptions"
+                }
+            },
+            "title": "RowOrderedArray",
+            "type": "object"
+        },
+        "RuntimeConfiguration": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "binary": {
+                    "type": "string"
+                },
+                "commandLineOptions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "environmentVariables": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "runtimeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "runtimeType",
+                "image",
+                "binary"
+            ],
+            "title": "RuntimeConfiguration",
+            "type": "object"
+        },
+        "Scenario": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "$schema": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "fromZoneId": {
+                    "type": "string"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PParameter"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterBool"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterString"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterDictStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnum"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnumList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                            },
+                            {
+                                "$ref": "#/$defs/PZone"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PZonePolygon"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneFixedGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterImageFormat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterGroup"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterModelPath"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                },
+                "toZoneId": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external",
+                "enabled",
+                "parameters"
+            ],
+            "title": "Scenario",
+            "type": "object"
+        },
+        "ScenarioDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "oneOf": [
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PScenarioIntrusion"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PScenarioZoneCrossing"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            ],
+            "properties": {
+                "$schema": {
+                    "const": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/scenario.schema.json",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "fromZoneId": {
+                    "type": "string"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PParameter"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterBool"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterString"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterDictStringList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnum"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterEnumList"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterChoiceFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeInt"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterRangeFloat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                            },
+                            {
+                                "$ref": "#/$defs/PZone"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneRectangle"
+                            },
+                            {
+                                "$ref": "#/$defs/PZonePolygon"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PZoneFixedGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterImageFormat"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterGroup"
+                            },
+                            {
+                                "$ref": "#/$defs/PParameterModelPath"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "schemaVersion": {
+                    "const": 2,
+                    "type": "integer"
+                },
+                "toZoneId": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$schema",
+                "schemaVersion",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external",
+                "enabled",
+                "parameters"
+            ],
+            "title": "ScenarioDocument",
+            "type": "object"
+        }
+    },
+    "$id": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/analytic-configuration.schema.json",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": false,
+    "description": "",
+    "metamodel_version": "1.11.0",
+    "properties": {
+        "$schema": {
+            "const": "https://raw.githubusercontent.com/Digital-Barriers/json-schema/release/v2.0/analytic-configuration.schema.json",
+            "format": "uri",
+            "type": "string"
+        },
+        "config": {
+            "$ref": "#/$defs/AnalyticConfig"
+        },
+        "parameters": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/$defs/PParameter"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterBool"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterInt"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterFloat"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterString"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterStringList"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterDictStringList"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterRectangle"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterEnum"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterEnumList"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterChoiceInt"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterChoiceFloat"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterRangeInt"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterRangeFloat"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterMinMaxDetectionSize"
+                    },
+                    {
+                        "$ref": "#/$defs/PZone"
+                    },
+                    {
+                        "$ref": "#/$defs/PZoneRectangle"
+                    },
+                    {
+                        "$ref": "#/$defs/PZonePolygon"
+                    },
+                    {
+                        "$ref": "#/$defs/PZoneGrid"
+                    },
+                    {
+                        "$ref": "#/$defs/PZoneFixedGrid"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterImageFormat"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterGroup"
+                    },
+                    {
+                        "$ref": "#/$defs/PParameterModelPath"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "scenarios": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "schemaVersion": {
+            "const": 2,
+            "type": "integer"
+        }
+    },
+    "required": [
+        "$schema",
+        "schemaVersion",
+        "config",
+        "parameters"
+    ],
+    "title": "AnalyticConfigurationDocument",
+    "type": "object",
+    "version": null
+}

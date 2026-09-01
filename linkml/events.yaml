@@ -1,0 +1,406 @@
+id: https://digitalbarriers.com/papillon/schema/linkml/events
+name: papillon_events
+description: Canonical events emitted by the Papillon analytics runtime.
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  papillon: https://digitalbarriers.com/papillon/schema/
+
+default_prefix: papillon
+default_range: string
+
+imports:
+  - common
+
+slots:
+  eventVersion:
+    range: integer
+    required: true
+    equals_number: 1
+  type:
+    range: string
+    required: true
+  id:
+    range: Guid
+    required: true
+  sourceId:
+    range: Guid
+    required: true
+  sourceName:
+    range: string
+  occurrenceTime:
+    range: datetime
+    required: true
+  detectionTime:
+    range: datetime
+  certainty:
+    range: float
+    minimum_value: 0
+    maximum_value: 1
+  annotation:
+    range: string
+  ancestors:
+    range: Guid
+    multivalued: true
+    inlined_as_list: true
+  eventPayload:
+    range: Any
+  frameNumber:
+    range: integer
+    required: true
+  frameWidth:
+    range: integer
+  frameHeight:
+    range: integer
+  width:
+    range: integer
+    required: true
+  height:
+    range: integer
+    required: true
+  name:
+    range: string
+    required: true
+  parameters:
+    range: Any
+    required: true
+  objectType:
+    range: string
+    required: true
+  objectConfidence:
+    range: float
+    required: true
+  bbox:
+    range: BoundingBox
+    required: true
+  x:
+    range: float
+  y:
+    range: float
+  w:
+    range: float
+  h:
+    range: float
+  sightingId:
+    range: Guid
+    required: true
+  sightingIds:
+    range: Guid
+    multivalued: true
+    inlined_as_list: true
+    required: true
+  length:
+    range: integer
+    required: true
+  description:
+    range: string
+  descriptionFrameNumber:
+    range: integer
+  image:
+    range: string
+  thumbnail:
+    range: string
+  motionConfidence:
+    range: float
+  maintained:
+    range: boolean
+  is_static:
+    range: boolean
+  stationary:
+    range: boolean
+  startFrame:
+    range: integer
+    required: true
+  endFrame:
+    range: integer
+    required: true
+  startTime:
+    range: datetime
+    required: true
+  endTime:
+    range: datetime
+    required: true
+  subjectId:
+    range: string
+  subjectConfidence:
+    range: float
+  subjectDescription:
+    range: string
+  alarmId:
+    range: Guid
+    required: true
+  scenarioId:
+    range: string
+    required: true
+  frameStart:
+    range: integer
+    required: true
+  frameEnd:
+    range: integer
+    required: true
+  direction:
+    range: string
+    required: true
+  number:
+    range: integer
+    required: true
+
+classes:
+  BoundingBox:
+    slots:
+      - type
+      - x
+      - y
+      - w
+      - h
+    slot_usage:
+      type:
+        required: true
+        equals_string: papillon::PRectanglef
+      x:
+        required: true
+      y:
+        required: true
+      w:
+        required: true
+      h:
+        required: true
+
+  Event:
+    abstract: true
+    slots:
+      - eventVersion
+      - type
+      - id
+      - sourceId
+      - sourceName
+      - occurrenceTime
+      - detectionTime
+      - certainty
+      - annotation
+      - ancestors
+      - eventPayload
+
+  AnalyticStartPayload:
+    slots:
+      - name
+      - parameters
+      - width
+      - height
+
+  AnalyticEndPayload:
+    slots:
+      - name
+
+  FrameStartPayload:
+    slots:
+      - frameNumber
+      - frameWidth
+      - frameHeight
+
+  FrameNumberPayload:
+    slots:
+      - frameNumber
+
+  TpoPayload:
+    slots:
+      - objectType
+      - objectConfidence
+      - bbox
+      - frameNumber
+      - sightingId
+      - length
+      - description
+      - descriptionFrameNumber
+      - image
+      - thumbnail
+      - motionConfidence
+      - maintained
+      - is_static
+
+  SightingPayload:
+    slots:
+      - objectType
+      - objectConfidence
+      - startFrame
+      - endFrame
+      - startTime
+      - endTime
+      - sightingId
+      - length
+      - description
+      - descriptionFrameNumber
+      - thumbnail
+      - stationary
+      - subjectId
+      - subjectConfidence
+      - subjectDescription
+
+  TpoAlarmPayload:
+    slots:
+      - alarmId
+      - frameNumber
+      - objectType
+      - scenarioId
+      - sightingId
+
+  AlarmPayload:
+    slots:
+      - alarmId
+      - frameNumber
+      - objectType
+      - scenarioId
+      - sightingIds
+
+  AlarmEndPayload:
+    is_a: AlarmPayload
+    slots:
+      - frameStart
+      - frameEnd
+
+  PeopleCounterPayload:
+    slots:
+      - direction
+      - number
+
+  AnalyticStartEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: analyticStart
+      eventPayload:
+        range: AnalyticStartPayload
+        required: true
+
+  AnalyticEndEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: analyticEnd
+      eventPayload:
+        range: AnalyticEndPayload
+        required: true
+
+  FrameStartEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: frameStart
+      eventPayload:
+        range: FrameStartPayload
+        required: true
+
+  FrameSkippedEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: frameSkipped
+      eventPayload:
+        range: FrameNumberPayload
+        required: true
+
+  FrameEndEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: frameEnd
+      eventPayload:
+        range: FrameNumberPayload
+        required: true
+
+  TpoEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: tpo
+      eventPayload:
+        range: TpoPayload
+        required: true
+
+  SightingEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: sighting
+      eventPayload:
+        range: SightingPayload
+        required: true
+
+  TpoAlarmStartEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: tpoAlarmStart
+      eventPayload:
+        range: TpoAlarmPayload
+        required: true
+
+  TpoAlarmEndEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: tpoAlarmEnd
+      eventPayload:
+        range: TpoAlarmPayload
+        required: true
+
+  AlarmStartEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: alarmStart
+      eventPayload:
+        range: AlarmPayload
+        required: true
+
+  AlarmInProgressEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: alarmInProgress
+      eventPayload:
+        range: AlarmPayload
+        required: true
+
+  AlarmEndEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: alarmEnd
+      eventPayload:
+        range: AlarmEndPayload
+        required: true
+
+  PeopleCounterEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: peopleCounter
+      eventPayload:
+        range: PeopleCounterPayload
+        required: true
+
+  ExtensionEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        pattern: '^(?!(?:analyticStart|analyticEnd|frameStart|frameSkipped|frameEnd|tpo|sighting|tpoAlarmStart|tpoAlarmEnd|alarmStart|alarmInProgress|alarmEnd|peopleCounter)$).+$'
+
+  EventDocument:
+    is_a: Event
+    tree_root: true
+    exactly_one_of:
+      - is_a: AnalyticStartEvent
+      - is_a: AnalyticEndEvent
+      - is_a: FrameStartEvent
+      - is_a: FrameSkippedEvent
+      - is_a: FrameEndEvent
+      - is_a: TpoEvent
+      - is_a: SightingEvent
+      - is_a: TpoAlarmStartEvent
+      - is_a: TpoAlarmEndEvent
+      - is_a: AlarmStartEvent
+      - is_a: AlarmInProgressEvent
+      - is_a: AlarmEndEvent
+      - is_a: PeopleCounterEvent
+      - is_a: ExtensionEvent

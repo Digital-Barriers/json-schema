@@ -1,0 +1,174 @@
+id: https://digitalbarriers.com/papillon/contract-prototype
+name: papillon_contract_prototype
+title: Papillon contract LinkML prototype
+description: Go/no-go prototype for polymorphic parameters and discriminated events.
+license: UNLICENSED
+prefixes:
+  linkml: https://w3id.org/linkml/
+  papillon: https://digitalbarriers.com/papillon/
+default_prefix: papillon
+default_range: string
+imports:
+  - linkml:types
+
+types:
+  Guid:
+    typeof: string
+    pattern: ^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$
+
+classes:
+  Parameter:
+    abstract: true
+    attributes:
+      type:
+        range: string
+        required: true
+        designates_type: true
+      name:
+        range: string
+        required: true
+      internalId:
+        range: string
+        required: true
+      description:
+        range: string
+        required: true
+      required:
+        range: boolean
+        required: true
+      external:
+        range: boolean
+        required: true
+
+  PParameterRangeInt:
+    is_a: Parameter
+    slot_usage:
+      type:
+        equals_string: PParameterRangeInt
+    attributes:
+      value:
+        range: integer
+        required: true
+      minValue:
+        range: integer
+        required: true
+      maxValue:
+        range: integer
+        required: true
+      stepValue:
+        range: integer
+        required: true
+
+  PParameterRangeFloat:
+    is_a: Parameter
+    slot_usage:
+      type:
+        equals_string: PParameterRangeFloat
+    attributes:
+      value:
+        range: float
+        required: true
+      minValue:
+        range: float
+        required: true
+      maxValue:
+        range: float
+        required: true
+      stepValue:
+        range: float
+        required: true
+
+  ParameterDocument:
+    exactly_one_of:
+      - is_a: PParameterRangeInt
+      - is_a: PParameterRangeFloat
+
+  Event:
+    attributes:
+      eventVersion:
+        range: integer
+        required: true
+      type:
+        range: string
+        required: true
+      id:
+        range: Guid
+        required: true
+      sourceId:
+        range: Guid
+        required: true
+      occurrenceTime:
+        range: datetime
+        required: true
+      eventPayload:
+        range: Any
+        required: true
+      annotation:
+        range: string
+      certainty:
+        range: float
+        minimum_value: 0
+        maximum_value: 1
+      sourceName:
+        range: string
+      detectionTime:
+        range: datetime
+      ancestors:
+        range: Guid
+        multivalued: true
+        inlined_as_list: true
+
+  AlarmPayload:
+    abstract: true
+    attributes:
+      alarmId:
+        range: Guid
+        required: true
+      frameNumber:
+        range: integer
+        required: true
+      objectType:
+        range: string
+        required: true
+      scenarioId:
+        range: string
+        required: true
+      sightingIds:
+        range: Guid
+        required: true
+        multivalued: true
+        inlined_as_list: true
+
+  AlarmStartPayload:
+    is_a: AlarmPayload
+
+  AlarmEndPayload:
+    is_a: AlarmPayload
+    attributes:
+      frameStart:
+        range: integer
+        required: true
+      frameEnd:
+        range: integer
+        required: true
+
+  AlarmStartEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: alarmStart
+      eventPayload:
+        range: AlarmStartPayload
+
+  AlarmEndEvent:
+    is_a: Event
+    slot_usage:
+      type:
+        equals_string: alarmEnd
+      eventPayload:
+        range: AlarmEndPayload
+
+  EventDocument:
+    exactly_one_of:
+      - is_a: AlarmStartEvent
+      - is_a: AlarmEndEvent

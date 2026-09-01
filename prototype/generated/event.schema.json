@@ -1,0 +1,525 @@
+{
+    "$defs": {
+        "AlarmEndEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/AlarmEndPayload"
+                },
+                "eventVersion": {
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "alarmEnd",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AlarmEndEvent",
+            "type": "object"
+        },
+        "AlarmEndPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmId": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "frameEnd": {
+                    "type": "integer"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "frameStart": {
+                    "type": "integer"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "scenarioId": {
+                    "type": "string"
+                },
+                "sightingIds": {
+                    "items": {
+                        "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "frameStart",
+                "frameEnd",
+                "alarmId",
+                "frameNumber",
+                "objectType",
+                "scenarioId",
+                "sightingIds"
+            ],
+            "title": "AlarmEndPayload",
+            "type": "object"
+        },
+        "AlarmPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmId": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "scenarioId": {
+                    "type": "string"
+                },
+                "sightingIds": {
+                    "items": {
+                        "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "alarmId",
+                "frameNumber",
+                "objectType",
+                "scenarioId",
+                "sightingIds"
+            ],
+            "title": "AlarmPayload",
+            "type": "object"
+        },
+        "AlarmStartEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {
+                    "$ref": "#/$defs/AlarmStartPayload"
+                },
+                "eventVersion": {
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "alarmStart",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "AlarmStartEvent",
+            "type": "object"
+        },
+        "AlarmStartPayload": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "alarmId": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "frameNumber": {
+                    "type": "integer"
+                },
+                "objectType": {
+                    "type": "string"
+                },
+                "scenarioId": {
+                    "type": "string"
+                },
+                "sightingIds": {
+                    "items": {
+                        "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "alarmId",
+                "frameNumber",
+                "objectType",
+                "scenarioId",
+                "sightingIds"
+            ],
+            "title": "AlarmStartPayload",
+            "type": "object"
+        },
+        "Event": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ancestors": {
+                    "items": {
+                        "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "annotation": {
+                    "type": "string"
+                },
+                "certainty": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "detectionTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "eventPayload": {},
+                "eventVersion": {
+                    "type": "integer"
+                },
+                "id": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "occurrenceTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "sourceId": {
+                    "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eventVersion",
+                "type",
+                "id",
+                "sourceId",
+                "occurrenceTime",
+                "eventPayload"
+            ],
+            "title": "Event",
+            "type": "object"
+        },
+        "EventDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "oneOf": [
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmStartEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AlarmEndEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            ],
+            "title": "EventDocument",
+            "type": "object"
+        },
+        "PParameterRangeFloat": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "maxValue": {
+                    "type": "number"
+                },
+                "minValue": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "stepValue": {
+                    "type": "number"
+                },
+                "type": {
+                    "const": "PParameterRangeFloat",
+                    "enum": [
+                        "PParameterRangeFloat"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "value",
+                "minValue",
+                "maxValue",
+                "stepValue",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterRangeFloat",
+            "type": "object"
+        },
+        "PParameterRangeInt": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "maxValue": {
+                    "type": "integer"
+                },
+                "minValue": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "stepValue": {
+                    "type": "integer"
+                },
+                "type": {
+                    "const": "PParameterRangeInt",
+                    "enum": [
+                        "PParameterRangeInt"
+                    ],
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "value",
+                "minValue",
+                "maxValue",
+                "stepValue",
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "PParameterRangeInt",
+            "type": "object"
+        },
+        "Parameter": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "external": {
+                    "type": "boolean"
+                },
+                "internalId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "Parameter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "internalId",
+                "description",
+                "required",
+                "external"
+            ],
+            "title": "Parameter",
+            "type": "object"
+        },
+        "ParameterDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "oneOf": [
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PParameterRangeInt"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PParameterRangeFloat"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            ],
+            "title": "ParameterDocument",
+            "type": "object"
+        }
+    },
+    "$id": "https://digitalbarriers.com/papillon/contract-prototype",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "",
+    "metamodel_version": "1.11.0",
+    "oneOf": [
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AlarmStartEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/AlarmEndEvent"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "title": "papillon_contract_prototype",
+    "type": "object",
+    "version": null
+}

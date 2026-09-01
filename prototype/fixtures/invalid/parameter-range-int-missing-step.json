@@ -1,0 +1,11 @@
+{
+  "type": "PParameterRangeInt",
+  "name": "Integer range without a step",
+  "internalId": "missingStep",
+  "description": "The required stepValue is absent.",
+  "required": false,
+  "external": true,
+  "minValue": 0,
+  "maxValue": 10,
+  "value": 5
+}
