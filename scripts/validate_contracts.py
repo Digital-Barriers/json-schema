@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import copy
 import json
 import os
@@ -163,8 +164,13 @@ def run_negative_tests(checks: dict[str, Draft201909Validator], samples: dict[st
 
 
 def main() -> int:
-    if not PAPILLON_EDGE.is_dir():
-        raise ContractError(f"Papillon Edge repository not found: {PAPILLON_EDGE}")
+    parser = argparse.ArgumentParser(description="Validate the generated Papillon JSON contracts.")
+    parser.add_argument(
+        "--schemas-only",
+        action="store_true",
+        help="Validate the generated JSON Schemas without requiring a Papillon Edge corpus.",
+    )
+    args = parser.parse_args()
 
     checks = {
         "configuration": validator("analytic-configuration"),
@@ -172,6 +178,13 @@ def main() -> int:
         "engine": validator("analytic-engine-configuration"),
         "event": validator("event"),
     }
+    if args.schemas_only:
+        print("Generated schemas OK: configuration, scenario, engine, event")
+        return 0
+
+    if not PAPILLON_EDGE.is_dir():
+        raise ContractError(f"Papillon Edge repository not found: {PAPILLON_EDGE}")
+
     manifest = load(CORPUS / "manifest.json")
     documents = {"configuration": 0, "scenario": 0, "engine": 0, "event": 0}
     samples: dict[str, Any] = {}
